@@ -17,3 +17,7 @@
 ### 🔹 `ListReverse.java`
 - **Problem**: Reverse a singly linked list.
 - **Technique**: Iterative pointer manipulation (can be extended to recursive).
+
+### 🔹 `MergeList.java`
+- **Problem**: Merge two sorted singly linked lists.
+- **Technique**: Iterative pointer manipulation (can be extended to recursive).
