@@ -1,36 +1,26 @@
 import java.util.HashMap;
-import java.util.Map;
 
-public class LongestSubstring 
+public class LongestSubstring
 {
-    public static int lengthOfLongestSubstring(String s) 
+    public int lengthOfLongestSubstring(String s)
     {
-        Map<Character, Integer> map = new HashMap<>();
-        int length = 0, maxLength = 0;
+        HashMap<Character, Integer> lastSeenIndexMap = new HashMap<>();
+        int leftPointer = 0, maxLength = 0;
 
-        for (int i = 0; i < s.length(); i++)
+        for (int rightPointer = 0; rightPointer < s.length(); rightPointer++)
         {
-            System.out.println("MAP: " + map);    
-            System.out.println("LENGTH: " + length);
-            System.out.println("MAX LENGTH: " + maxLength);
-            System.out.println("\n");
+            char currentChar = s.charAt(rightPointer);
 
-            if (map.containsKey(s.charAt(i)))
+            if (lastSeenIndexMap.containsKey(currentChar))
             {
-                length = Math.max(map.get(s.charAt(i)) + 1, length); 
-                // If it contains the key, that's when we alter the length
+                // move the left pointer to the right of the last seen index of the current character
+                leftPointer = Math.max(lastSeenIndexMap.get(currentChar) + 1, leftPointer);
             }
 
-            map.put(s.charAt(i), i);
-            maxLength = Math.max(maxLength, i - length + 1);
+            lastSeenIndexMap.put(currentChar, rightPointer); // put the current character in the map with its right pointer index
+            maxLength = Math.max(maxLength, rightPointer - leftPointer + 1); // max b/t current max or right - left + 1
         }
 
         return maxLength;
-    }
-
-    public static void main(String[] args) 
-    {
-        String s = "abcabcbb";
-        System.out.println(lengthOfLongestSubstring(s));
     }
 }
